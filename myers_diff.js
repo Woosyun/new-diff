@@ -1,4 +1,3 @@
-const { debug } = require('console');
 const fs = require('fs');
 
 class Diagonals {
@@ -134,7 +133,7 @@ function FindMiddleSnake(A, N, B, M) {
             u = x;
             v = y;
 
-            while (x > 1 && y > 1 && A[x - 1] === B[y - 1]) {
+            while (x > 0 && y > 0 && A[x - 1] === B[y - 1]) {
                 x--;
                 y--;
             }
@@ -189,7 +188,7 @@ function printResult(A, B, x, y, u, v) {
     console.log('B3: ', B.slice(v + 1, B.length));
     console.log('===============================');
 }
-function LCS(A, B) {
+function diff(A, B) {
     const N = A.length;
     const M = B.length;
 
@@ -202,9 +201,9 @@ function LCS(A, B) {
         const x = snake.x, y = snake.y, u = snake.u - 1, v = snake.v - 1;
         // printResult(A, B, x, y, u, v);
         if (x != null) {
-            LCS(A.slice(0, x), B.slice(0, y));
+            diff(A.slice(0, x), B.slice(0, y));
             printLines(' ', A.slice(x, u + 1));
-            LCS(A.slice(u + 1, N), B.slice(v + 1, M));
+            diff(A.slice(u + 1, N), B.slice(v + 1, M));
         } else { // 같은 문자열이 없(을 수도 있??)는 경우
             printLines('-', A);
             printLines('+', B);
@@ -212,14 +211,14 @@ function LCS(A, B) {
     }
 }
 
-function diff(file1Path, file2Path) {
+function run(file1Path, file2Path) {
     const file1 = loadFile(file1Path);
     const file2 = loadFile(file2Path);
 
     const A = file1.split('\n');
     const B = file2.split('\n');
 
-    LCS(A, B);
+    diff(A, B);
 }
 
-module.exports = { diff };
+module.exports = { run };
