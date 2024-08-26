@@ -1,15 +1,16 @@
-// const { run } = require('./myers_diff');
-const { run } = require('./new_diff');
+const { run: runMyersDiff } = require('./myers_diff');
+const { run: runNewDiff } = require('./new_diff');
 
-const testCases = ['add_1', 'delete_1', 'move_1'];
+const testCases = ['add_1.c', 'delete_1.c', 'move_1.c', 'move_fn_1.c'];
 
 const samplePath = './samples/';
-const originalsuffix = '.c';
-const modifiedsuffix = '.c.m';
+const modifiedsuffix = '.m';
 
 function test(fileName) {
-    run(samplePath + fileName + originalsuffix, samplePath + fileName + modifiedsuffix);
-    console.log('=======================');
+  runMyersDiff(samplePath + fileName, samplePath + fileName + modifiedsuffix);
+  console.log('-----------------------');
+  runNewDiff(samplePath + fileName, samplePath + fileName + modifiedsuffix);
+  console.log('=======================');
 }
 
 function main(i, j) {
@@ -18,4 +19,5 @@ function main(i, j) {
     }
 }
 
-main(0, testCases.length);
+main(0, 1);
+// main(0, testCases.length);
