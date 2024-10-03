@@ -231,20 +231,33 @@ export function run(from: string, to: string): void {
   const topDownMapping = new Map<number, number>();
   topDown(A, B, topDownMapping);
 
-  console.log('Top Down Mapping is ', topDownMapping);
+//   console.log('Top Down Mapping is ', topDownMapping);
 
   const recoverdM = recovery(A, B, topDownMapping);
 
-  for (const [fromIdx, toIdx] of topDownMapping) {
-    console.log(`${JSON.stringify(A[fromIdx], null, 2)} is same in ${fromIdx}th from before and ${toIdx}th from after`);
-  }
+//   for (const [fromIdx, toIdx] of topDownMapping) {
+//     console.log(`${JSON.stringify(A[fromIdx], null, 2)} is same in ${fromIdx}th from before and ${toIdx}th from after`);
+//   }
 
-  console.log('Recovered Mapping is ', recoverdM);
+//   console.log('Recovered Mapping is ', recoverdM);
   
   for (const [fnIdx, mapping] of recoverdM) {
-    console.log(`Function ${A[fnIdx]} is detected and skipped in topdown phase in both files`);
-    for (const [fromIdx, toIdx] of mapping) {
-      console.log(`${JSON.stringify(A[fnIdx].children[fromIdx], null, 2)} is same in ${fromIdx}th from before and ${toIdx}th from after`);
-    }
+    console.log(`Detected move action to function ${JSON.stringify(A[fnIdx].label)}`);
+    // for (const [fromIdx, toIdx] of mapping) {
+    //   console.log(`${JSON.stringify(A[fnIdx].children[fromIdx], null, 2)} is same in ${fromIdx}th from before and ${toIdx}th from after`);
+    // }
   }
+}
+
+export function print(from: string, to: string): void {
+    const A = getNodes(parse(loadFile(from)));
+    const B = getNodes(parse(loadFile(to)));
+  
+    const topDownMapping = new Map<number, number>();
+    topDown(A, B, topDownMapping);
+  
+    const recoverdM = recovery(A, B, topDownMapping);
+    for (const [fnIdx, mapping] of recoverdM) {
+      console.log(`Detected move action to function ${JSON.stringify(A[fnIdx].label)}`);
+    }
 }

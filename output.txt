@@ -1,0 +1,30 @@
+Detected move action to function "int add(int a, int b) {"
+Detected move action to function "int multiply(int a, int b) {"
+Detected move action to function "int remainder(int a, int b) {"
+-----------------------
+- int add(int a, int b) {
+-     return a + b;
++ int remainder(int a, int b) {
++     return a % b;
+  }
+  
+  int minus(int a, int b) {
+      return a - b;
+  }
+  
+- int multiply(int a, int b) {
+-     return a * b;
++ int add(int a, int b) {
++     return a + b;
+  }
+  
+  int divide(int a, int b) {
+      return a / b;
+  }
+  
+- int remainder(int a, int b) {
+-     return a % b;
++ int multiply(int a, int b) {
++     return a * b;
+  }
+=======================

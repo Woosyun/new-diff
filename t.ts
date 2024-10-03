@@ -1,13 +1,16 @@
 import { run } from './newDiff';
+import { run as compare } from './myers_diff';
 
-const testCases = ['add_1.c', 'delete_1.c', 'move_1.c', 'move_fn_1.c'];
+const testCases = ['add_1.c', 'delete_1.c', 'move_1.c', 'move_fn_1.c', 'move_fn_2.c'];
 
 const samplePath = './samples/';
 const modifiedsuffix = '.m';
 
 function test(fileName: string) {
   run(samplePath + fileName, samplePath + fileName + modifiedsuffix);
-  console.log('=======================');
+    console.log('-----------------------');
+    compare(samplePath + fileName, samplePath + fileName + modifiedsuffix);
+    console.log('=======================');
 }
 
 function main(i: number, j: number) {
@@ -16,5 +19,5 @@ function main(i: number, j: number) {
   }
 }
 
-main(3, 4);
+main(4, 5);
 // main(0, testCases.length);
